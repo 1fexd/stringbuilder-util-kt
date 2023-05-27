@@ -33,7 +33,3 @@ fun StringBuilder.squareWrapped(
 fun StringBuilder.curlyWrapped(
     builder: StringBuilder.() -> Unit
 ) = wrapped("{", "}", builder)
-
-
-
-
