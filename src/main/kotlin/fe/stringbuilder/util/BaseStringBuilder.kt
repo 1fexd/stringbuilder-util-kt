@@ -1,4 +1,4 @@
-package fe.stringbuilderext
+package fe.stringbuilder.util
 
 interface BaseStringBuilder<T, B> {
     fun applyBuilder(stringBuilder: StringBuilder, block: B)

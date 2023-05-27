@@ -1,14 +1,30 @@
-package fe.stringbuilderext
+package fe.stringbuilder.util
 
 fun StringBuilder.separated(
     separator: String,
     builder: SeparatedStringBuilder.() -> Unit
 ) = SeparatedStringBuilder(separator).build(this, builder)
 
+fun StringBuilder.slashSeparated(
+    builder: SeparatedStringBuilder.() -> Unit
+) = separated("/", builder)
+
+fun StringBuilder.commaSeparated(
+    builder: SeparatedStringBuilder.() -> Unit
+) = separated(",", builder)
+
 fun StringBuilder.separated(
     separator: String,
     vararg items: StringBuilder.() -> Unit
 ) = SeparatedStringBuilder(separator, items = items.toMutableList()).build(this, null)
+
+fun StringBuilder.slashSeparated(
+    vararg items: StringBuilder.() -> Unit
+) = separated("/", *items)
+
+fun StringBuilder.commaSeparated(
+    vararg items: StringBuilder.() -> Unit
+) = separated(",", *items)
 
 fun StringBuilder.wrapped(
     wrapWith: String,

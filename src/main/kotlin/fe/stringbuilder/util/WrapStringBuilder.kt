@@ -1,4 +1,4 @@
-package fe.stringbuilderext
+package fe.stringbuilder.util
 
 class WrapStringBuilder(
     private val wrapStart: String,
