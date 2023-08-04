@@ -1,9 +1,7 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
-    kotlin("jvm") version "1.6.20"
+    kotlin("jvm") version "1.9.0"
     java
-    maven
+    `maven-publish`
     id("net.nemerosa.versioning") version "3.0.0"
 }
 
@@ -12,17 +10,19 @@ version = versioning.info.tag ?: versioning.info.full
 
 repositories {
     mavenCentral()
-    maven(url = "https://jitpack.io")
 }
 
 dependencies {
     testImplementation(kotlin("test"))
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = project.group.toString()
+            version = project.version.toString()
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+            from(components["java"])
+        }
+    }
 }
