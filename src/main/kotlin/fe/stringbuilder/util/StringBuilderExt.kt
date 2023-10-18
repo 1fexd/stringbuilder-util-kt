@@ -1,5 +1,11 @@
 package fe.stringbuilder.util
 
+
+fun StringBuilder.extend(fn: StringBuilder.() -> Unit): StringBuilder {
+    fn(this)
+    return this
+}
+
 fun StringBuilder.separated(
     separator: String,
     builder: SeparatedStringBuilder.() -> Unit
