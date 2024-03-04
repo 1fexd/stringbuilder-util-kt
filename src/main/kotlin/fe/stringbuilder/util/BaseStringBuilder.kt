@@ -1,10 +1,11 @@
 package fe.stringbuilder.util
 
-interface BaseStringBuilder<T, B> {
-    fun applyBuilder(stringBuilder: StringBuilder, block: B)
 
-    fun build(stringBuilder: StringBuilder, block: B): StringBuilder {
-        applyBuilder(stringBuilder, block)
-        return stringBuilder
+interface BaseAppendable<T : Appendable, B> {
+    fun apply(appendable: T, block: B)
+
+    fun build(appendable: T, block: B): T {
+        apply(appendable, block)
+        return appendable
     }
 }

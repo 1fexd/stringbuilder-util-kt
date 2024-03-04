@@ -1,24 +1,31 @@
 package fe.stringbuilder.util
 
-class WrapStringBuilder(
-    private val wrapStart: String,
-    private val wrapEnd: String,
-) : BaseStringBuilder<StringBuilder, StringBuilder.() -> Unit> {
+class WrapStringBuilder<T : Appendable>(
+    private val start: CharSequence,
+    private val end: CharSequence,
+) : BaseAppendable<T, BuilderScope<T>> {
 
-    override fun applyBuilder(stringBuilder: StringBuilder, block: StringBuilder.() -> Unit) {
-        stringBuilder.append(wrapStart)
-        stringBuilder.apply(block)
-        stringBuilder.append(wrapEnd)
+    override fun apply(appendable: T, block: BuilderScope<T>) {
+        appendable.append(start)
+        appendable.apply(block)
+        appendable.append(end)
     }
 }
 
-fun buildWrappedString(
-    wrapWith: String,
-    builder: StringBuilder.() -> Unit
-) = buildWrappedString(wrapWith, wrapWith, builder)
+//interface NewBaseStringBuilder<B> {
+//    fun applyBuilder(stringBuilder: Appendable, block: B)
+//
+//    fun build(stringBuilder: Appendable, block: B): Appendable {
+//        applyBuilder(stringBuilder, block)
+//        return stringBuilder
+//    }
+//}
 
-fun buildWrappedString(
-    wrapStart: String,
-    wrapEnd: String,
-    builder: StringBuilder.() -> Unit
-) = StringBuilder().wrapped(wrapStart, wrapEnd, builder).toString()
+
+fun buildWrappedString(wrapWith: String, builder: BuilderScope<StringBuilder>): String {
+    return buildWrappedString(wrapWith, wrapWith, builder)
+}
+
+fun buildWrappedString(wrapStart: String, wrapEnd: String, builder: BuilderScope<StringBuilder>): String {
+    return StringBuilder().wrapped(wrapStart, wrapEnd, builder).toString()
+}
