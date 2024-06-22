@@ -1,11 +1,11 @@
 plugins {
-    kotlin("jvm") version "1.9.0"
+    kotlin("jvm") version "1.9.23"
     java
     `maven-publish`
     id("net.nemerosa.versioning") version "3.0.0"
 }
 
-group = "fe.stringbuilderext"
+group = "fe.stringbuilder-util"
 version = versioning.info.tag ?: versioning.info.full
 
 repositories {

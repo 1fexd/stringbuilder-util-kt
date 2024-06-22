@@ -1,1 +1,1 @@
-rootProject.name = "stringbuilder-util-kt"
+rootProject.name = "stringbuilder-util"
